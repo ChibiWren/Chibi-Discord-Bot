@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const Client = require('./client/Client');
 const config = require('./config.json');
 const {Player} = require('discord-player');
+require('dotenv/config')
 
 const client = new Client();
 client.commands = new Discord.Collection();
@@ -96,4 +97,4 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
-client.login(config.token);
+client.login(process.env.TOKEN);
