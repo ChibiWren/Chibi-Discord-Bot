@@ -1,5 +1,4 @@
-const { execute } = require("./uwu");
-
+//TODO make cards and dealer ai
 module.exports = {
     name: 'blackjack',
     description: 'Play a round of Blackjack against the bot',
@@ -9,5 +8,11 @@ module.exports = {
         description: 'Choose to hit or stand',
         required: true
     }],
-    execute
+    execute (interaction) {
+        try{
+
+        } catch (err) {
+
+        }
+    }
 }
