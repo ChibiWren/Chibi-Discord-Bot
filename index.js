@@ -5,10 +5,14 @@ const config = require('./config.json');
 const {Player} = require('discord-player');
 require('dotenv/config')
 
+//TODO Sort commands files in sepearete files based on use
+
 const client = new Client();
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+//const musicFiles = fs.readdirSync('./commands./')
+/* const econFiles = */
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -85,6 +89,8 @@ client.on('messageCreate', async message => {
 client.on('interactionCreate', async interaction => {
   const command = client.commands.get(interaction.commandName.toLowerCase());
 
+
+
   try {
     if (interaction.commandName == 'ban' || interaction.commandName == 'userinfo') {
       command.execute(interaction, client);
@@ -104,8 +110,10 @@ client.on('interactionCreate', async interaction => {
     } else if (interaction.commandName == 'uwu') {
       command.execute(interaction);
     } else if (interaction.commandName == 'blackjack') {
-      command.execute(interaction);
+      command.execute(interaction);/* 
     } else if (interaction.commandName == 'trivia') {
+        command.execute(interaction); */
+      } else if (interaction.commandName == 'fortune') {
         command.execute(interaction);
     } else {
       command.execute(interaction, player);

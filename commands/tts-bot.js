@@ -12,7 +12,7 @@ module.exports = {
         description: 'Type your sentence here',
         required: true,
 
-    }],
+    },],
 
      async execute(interaction) {
 
