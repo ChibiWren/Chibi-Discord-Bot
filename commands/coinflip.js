@@ -6,28 +6,34 @@ module.exports = {
     description: 'Flips a coin',
     execute (interaction) {
 
-        const flip = ['heads', 'tails']
-        const result = flip[Math.floor(Math.random() * flip.length)]
+        try {
+        
+        const result = Math.floor(Math.random() * 2)
 
         console.log(result)
 
-        if (result === 'heads') {
+        if (result == 0) {
             const headsEmbed = new MessageEmbed()
             .setTitle('HEADS')
-            .setColor('#F7F143')
-            .setImage('https://storcpdkenticomedia.blob.core.windows.net/media/recipemanagementsystem/media/recipe-media-files/recipes/retail/x17/2020_belgian-style-waffles_16700_760x580.jpg?ext=.jpg')
+            .setColor('#67D1E2')
+            .setImage('https://i.imgur.com/IgFKCn2.png')
 
-            interaction.channel.send({embeds: [headsEmbed]})
+            interaction.reply({embeds: [headsEmbed]})
 
-        } else if (result === 'tails') {
+        } else {
             const tailsEmbed = new MessageEmbed()
             .setTitle('TAILS')
-            .setColor('#F777ED')
-            .setImage('https://m.media-amazon.com/images/I/A1xRLOh8ukL._SL1500_.jpg')
+            .setColor('#67D1E2')
+            .setImage('https://i.imgur.com/MCgoAGo.png')
 
-            interaction.channel.send({embeds: [tailsEmbed]})
-        } else {
-            interaction.channel.send('Error, could not process')
-        }
+            interaction.reply({embeds: [tailsEmbed]})
+        } 
+    } catch (err) {
+        console.log(error);
+        interaction.followUp({
+          content: 'There was an error trying to execute that command: ' + error.message,
+        })
+    
     }
+}
 }

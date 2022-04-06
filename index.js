@@ -19,6 +19,8 @@ console.log(client.commands);
 
 const player = new Player(client);
 
+
+
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
@@ -86,6 +88,25 @@ client.on('interactionCreate', async interaction => {
   try {
     if (interaction.commandName == 'ban' || interaction.commandName == 'userinfo') {
       command.execute(interaction, client);
+    } else if (interaction.commandName == 'tts-bot') {
+      command.execute(interaction)
+    } else if (interaction.commandName == 'amongus') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'hello') {
+      command.execute(interaction);
+      //interaction.reply(`username: ${interaction.user} `)
+    } else if (interaction.commandName == 'coinflip') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'owo') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'rps') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'uwu') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'blackjack') {
+      command.execute(interaction);
+    } else if (interaction.commandName == 'trivia') {
+        command.execute(interaction);
     } else {
       command.execute(interaction, player);
     }

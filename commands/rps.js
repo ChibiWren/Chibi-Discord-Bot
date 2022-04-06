@@ -12,13 +12,28 @@ module.exports = {
 
     }] ,
     execute (interaction) {
+
+
+        //win message
+        function win() {
+            interaction.reply(`${interaction.user} wins!`)
+        }
+       
+        //tie message
+        function tie() {
+            interaction.reply('Its a tie...')
+        }
+
+
+        //lose message
+        function lose() {
+            interaction.reply('Chibi Bot Wins!')
+        }
         
         const rps = ['rock', 'paper', 'scissors']
         
         const collector = interaction.options.get('hand').value
 
-       
-            
 
             const user = collector.toLowerCase()
             const cpu = rps[Math.floor(Math.random() * rps.length)]
@@ -29,8 +44,7 @@ module.exports = {
             //checks the input from user and random variable from cpu to find winner
             try {
             if (cpu === 'rock') {
-                
-
+                //rock embed
                 var rockEmbed = new MessageEmbed()
                 .setTitle('Chibi Bot played Rock')
                 .setImage('https://i.imgur.com/0ijLrZZ.png')
@@ -39,20 +53,13 @@ module.exports = {
                 interaction.channel.send({embeds: [rockEmbed]})
 
 
-                if (user === 'rock') interaction.channel.send('Its a Tie') 
-                if (user === 'scissors') {
-                    interaction.channel.send('Chibi Bot Wins!')
-                   
-                }
-                if (user === 'paper') {
-                    interaction.channel.send('You Win!')
-                    
-                }
-
-                
+                if (user === 'rock') { tie() } 
+                if (user === 'scissors') { lose() }
+                if (user === 'paper') { win() }
+  
                 
             } else if (cpu === 'paper') {
-
+                //paper embed
                 const paperEmbed = new MessageEmbed()
                 .setTitle('Chibi Bot played Paper')
                 .setImage('https://i.imgur.com/NHz26sy.png')
@@ -61,19 +68,14 @@ module.exports = {
                 interaction.channel.send({embeds: [paperEmbed]})
   
 
-                if (user === 'rock') {
-                    interaction.channel.send('Chibi Bot Wins!') 
-                    
-                }
-                if (user === 'scissors') {
-                    interaction.channel.send('You Win!')
-                    
-                }
-                if (user === 'paper') interaction.channel.send('Its a Tie')     
+                if (user === 'rock') { lose() }
+                if (user === 'scissors') { win() }
+                if (user === 'paper') { tie() }     
 
 
             } else if (cpu === 'scissors') {
-
+                
+                //scissors embed
                  const scissorsEmbed = new MessageEmbed()
                 .setTitle('Chibi Bot played Scissors')
                 .setImage('https://i.imgur.com/eSirMpe.png')
@@ -81,19 +83,11 @@ module.exports = {
 
                 interaction.channel.send({embeds: [scissorsEmbed]})
 
-                
+                if (user === 'rock') { win() }
+                if (user === 'scissors') { tie() }
+                if (user === 'paper') { lose() }
 
-                if (user === 'rock') {
-                    interaction.channel.send('You Win!') 
-                    
-                }
-                if (user === 'scissors') interaction.channel.send('Its a Tie')
-                if (user === 'paper') {
-                    interaction.channel.send('Chibi Bot Wins!') 
-                    
-                }
-
-                
+               
             } else {
                 
                 interaction.channel.send('Invalid Input')
