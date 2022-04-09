@@ -3,7 +3,7 @@ module.exports = {
     description: 'Gives a random piece of trivia',
     
     
-    execute(interaction) {
+    execute(interaction, player) {
 
         try {
         const rand = Math.floor((Math.random() * 10))

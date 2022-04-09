@@ -10,7 +10,7 @@ module.exports = {
         required: false,
     },],
 
-    execute (interaction) {
+    execute (interaction, player) {
         try {
             const rand = Math.floor((Math.random() * 10))
     

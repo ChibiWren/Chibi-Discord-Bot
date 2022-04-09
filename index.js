@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const Client = require('./client/Client');
 const config = require('./config.json');
 const {Player} = require('discord-player');
+/* const { executionAsyncResource } = require('async_hooks'); */
 require('dotenv/config')
 
 //TODO Sort commands files in sepearete files based on use
@@ -11,15 +12,30 @@ const client = new Client();
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-//const musicFiles = fs.readdirSync('./commands./')
+
+
 /* const econFiles = */
+
+
+/* const musicClient = new Client()
+musicClient.commands = new Discord.Collection()
+const musicCommandFiles = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
+ */
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
 }
 
+//Trying to sort commands based on function type
+/* for (const musicFile of musicCommandFiles) {
+  const musicCommand = require(`./commands/music/${musicFile}`)
+  musicClient.commands.set(musicCommand.name, musicCommand)
+} */
+
 console.log(client.commands);
+//console.log(musicClient.commands);
+
 
 const player = new Player(client);
 
@@ -59,6 +75,7 @@ client.once('ready', async () => {
 
 client.on('ready', function() {
   client.user.setActivity(config.activity, { type: config.activityType });
+ 
 });
 
 client.once('reconnecting', () => {
@@ -88,36 +105,20 @@ client.on('messageCreate', async message => {
 
 client.on('interactionCreate', async interaction => {
   const command = client.commands.get(interaction.commandName.toLowerCase());
+  //const musicCommand = musicClient.commands.get(interaction.commandName.toLowerCase())
 
 
 
   try {
-    if (interaction.commandName == 'ban' || interaction.commandName == 'userinfo') {
+    
+
+   if (interaction.commandName == 'ban' || interaction.commandName == 'userinfo') {
       command.execute(interaction, client);
-    } else if (interaction.commandName == 'tts-bot') {
+    } else if (interaction.commandName == 'tts-bot' || interaction.commandName == 'blackjack') {
       command.execute(interaction)
-    } else if (interaction.commandName == 'amongus') {
-      command.execute(interaction);
-    } else if (interaction.commandName == 'hello') {
-      command.execute(interaction);
-      //interaction.reply(`username: ${interaction.user} `)
-    } else if (interaction.commandName == 'coinflip') {
-      command.execute(interaction);
-    } else if (interaction.commandName == 'owo') {
-      command.execute(interaction);
-    } else if (interaction.commandName == 'rps') {
-      command.execute(interaction);
-    } else if (interaction.commandName == 'uwu') {
-      command.execute(interaction);
-    } else if (interaction.commandName == 'blackjack') {
-      command.execute(interaction);/* 
-    } else if (interaction.commandName == 'trivia') {
-        command.execute(interaction); */
-      } else if (interaction.commandName == 'fortune') {
-        command.execute(interaction);
     } else {
       command.execute(interaction, player);
-    }
+    } 
   } catch (error) {
     console.error(error);
     interaction.followUp({

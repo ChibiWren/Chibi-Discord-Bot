@@ -1,7 +1,7 @@
 module.exports = {
     name: 'uwu',
     description: 'sends an uwu',
-    execute (interaction) {
+    execute (interaction, player) {
         interaction.reply('uwu')
     }
 }

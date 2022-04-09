@@ -2,7 +2,7 @@
 module.exports = {
     name: 'owo',
     description: 'Sends an owo',
-    execute(interaction) {
+    execute(interaction, player) {
         interaction.reply({
           content: 'OWO, Whats this?'
         })

@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'coinflip',
     description: 'Flips a coin',
-    execute (interaction) {
+    execute (interaction, player) {
 
         try {
         

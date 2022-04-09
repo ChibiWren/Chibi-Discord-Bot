@@ -11,8 +11,7 @@ module.exports = {
         required: true,
 
     }] ,
-    execute (interaction) {
-
+     execute (interaction, player) {
 
         //win message
         function win() {
@@ -20,15 +19,17 @@ module.exports = {
         }
        
         //tie message
-        function tie() {
+         function tie() {
             interaction.reply('Its a tie...')
         }
 
 
         //lose message
-        function lose() {
+         function lose() {
             interaction.reply('Chibi Bot Wins!')
         }
+
+        
         
         const rps = ['rock', 'paper', 'scissors']
         
@@ -53,9 +54,9 @@ module.exports = {
                 interaction.channel.send({embeds: [rockEmbed]})
 
 
-                if (user === 'rock') { tie() } 
-                if (user === 'scissors') { lose() }
-                if (user === 'paper') { win() }
+                if (user === 'rock') {  tie() } 
+                if (user === 'scissors') {  lose() }
+                if (user === 'paper') {  win() }
   
                 
             } else if (cpu === 'paper') {
@@ -68,9 +69,9 @@ module.exports = {
                 interaction.channel.send({embeds: [paperEmbed]})
   
 
-                if (user === 'rock') { lose() }
-                if (user === 'scissors') { win() }
-                if (user === 'paper') { tie() }     
+                if (user === 'rock') {  lose() }
+                if (user === 'scissors') {  win() }
+                if (user === 'paper') {  tie() }     
 
 
             } else if (cpu === 'scissors') {
@@ -83,10 +84,9 @@ module.exports = {
 
                 interaction.channel.send({embeds: [scissorsEmbed]})
 
-                if (user === 'rock') { win() }
-                if (user === 'scissors') { tie() }
-                if (user === 'paper') { lose() }
-
+                if (user === 'rock') {  win() }
+                if (user === 'scissors') {  tie() }
+                if (user === 'paper') {  lose() }
                
             } else {
                 

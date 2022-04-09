@@ -6,10 +6,9 @@ module.exports = {
     ],
 
 
-    async execute(interaction) {
+    async execute(interaction, player) {
         interaction.reply({
-          content: `Hello, World!`,
-          ephemeral: false,
+          content: `Hello, World!`
         });
       },
       //, ${user.username}

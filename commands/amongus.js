@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'amongus',
     description: 'Displays an amongus',
-    execute (interaction) {
+    execute (interaction, player) {
 
         const amongUsEmbed = new MessageEmbed()
         .setColor('#FF0000')
