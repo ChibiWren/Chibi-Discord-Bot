@@ -11,35 +11,37 @@ require('dotenv/config')
 const client = new Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-
-/* const econFiles = */
-
-
-/* const musicClient = new Client()
-musicClient.commands = new Discord.Collection()
-const musicCommandFiles = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
- */
+/* const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
-}
+}*/
 
-//Trying to sort commands based on function type
-/* for (const musicFile of musicCommandFiles) {
-  const musicCommand = require(`./commands/music/${musicFile}`)
-  musicClient.commands.set(musicCommand.name, musicCommand)
-} */
+(function readdir(path='./commands') {
+  const allCommands = fs.readdirSync(path);
+  for (const command of allCommands) {
+      if(fs.statSync(`${path}/${command}`).isDirectory()) {
+          readdir(`${path}/${command}`);
+          continue;
+      }
+
+      try {
+          const loadedCommand = require(`${path}/${command}`);
+          client.commands.set(loadedCommand.name, loadedCommand);
+          
+          
+          console.log(`Loaded command ${loadedCommand.name} (${path}/${command})`);
+      } catch (error) {
+          console.log(`Failed to load command ${path}/${command}. **Please report the following error:**`);
+          console.log(error);
+      }
+  }
+})();
 
 console.log(client.commands);
-//console.log(musicClient.commands);
-
 
 const player = new Player(client);
-
-
 
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
@@ -105,12 +107,8 @@ client.on('messageCreate', async message => {
 
 client.on('interactionCreate', async interaction => {
   const command = client.commands.get(interaction.commandName.toLowerCase());
-  //const musicCommand = musicClient.commands.get(interaction.commandName.toLowerCase())
 
-
-
-  try {
-    
+  try {    
 
    if (interaction.commandName == 'ban' || interaction.commandName == 'userinfo') {
       command.execute(interaction, client);

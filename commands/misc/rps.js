@@ -1,5 +1,4 @@
 //TODO change the color of embed based on win/loss
-
 const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'rps',
@@ -34,6 +33,10 @@ module.exports = {
         const rps = ['rock', 'paper', 'scissors']
         
         const collector = interaction.options.get('hand').value
+        if(rps.indexOf(collector) === -1) {
+            console.log('Invalid Input');
+            interaction.reply("Sorry, This is not a Valid Input")
+          } else {
 
 
             const user = collector.toLowerCase()
@@ -99,6 +102,7 @@ module.exports = {
               content: 'There was an error trying to execute that command: ' + error.message,
             });
           }
+        }
     } 
         
 }

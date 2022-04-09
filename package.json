@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "prettier --write \"**/*.js\""
+    "lint": "prettier --write \"**/*.js\"",
+    "dev": "nodemon main.js" 
   },
   "keywords": [
     "discord",
